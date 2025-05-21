@@ -29,9 +29,7 @@ submitButton.addEventListener("click", () => {
     `;
   } else {
     // On main domain, handle form submission
-    if (user) {
       window.location.href = `https://${user}.fenil.life`;
-    }
   }
 });
 
