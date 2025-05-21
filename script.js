@@ -14,9 +14,12 @@ const host = window.location.hostname;
 const parts = host.split(".");
 let subdomain = "";
 
-submitButton.addEventListener("click", () => {
-  const user = yourName.value.trim().toLowerCase();
-  
+// submitButton.addEventListener("click", () => {
+//   const name = yourName.value;
+//   console.log(name);
+// });
+
+// submitButton.addEventListener("click", () => {
   if (parts.length > 2) {
     subdomain = parts[0]; // e.g., "john" from john.fenil.life
   }
@@ -28,10 +31,23 @@ submitButton.addEventListener("click", () => {
       <p>Welcome to your personal page at ${subdomain}.fenil.life</p>
     `;
   } else {
-    // On main domain, handle form submission
-      window.location.href = `https://${user}.fenil.life`;
+    // On main domain, attach form handler
+    userForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const user = yourName.value.trim().toLowerCase();
+      if (user) {
+        window.location.href = `https://${user}.fenil.life`;
+      }
+    });
   }
-});
+// });
+
+
+
+
+
+
+
 
 const allSongs = [
   {
