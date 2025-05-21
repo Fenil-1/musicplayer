@@ -5,6 +5,50 @@ const nextButton = document.getElementById("next");
 const previousButton = document.getElementById("previous");
 const shuffleButton = document.getElementById("shuffle");
 
+const yourName = document.getElementById("search");
+const submitButton = document.getElementById("search-btn");
+const mainContent = document.getElementById("main-content");
+const userForm = document.getElementById("userForm");
+
+const host = window.location.hostname;
+const parts = host.split(".");
+let subdomain = "";
+
+// submitButton.addEventListener("click", () => {
+//   const name = yourName.value;
+//   console.log(name);
+// });
+
+submitButton.addEventListener("click", () => {
+  if (parts.length > 2) {
+    subdomain = parts[0]; // e.g., "john" from john.fenil.life
+  }
+  
+  // If on subdomain, show personalized content
+  if (subdomain && subdomain !== "www" && subdomain !== "fenil") {
+    mainContent.innerHTML = `
+      <h1>Hello, ${subdomain}! 👋</h1>
+      <p>Welcome to your personal page at ${subdomain}.fenil.life</p>
+    `;
+  } else {
+    // On main domain, attach form handler
+    userForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const user = yourName.value.trim().toLowerCase();
+      if (user) {
+        window.location.href = `https://${user}.fenil.life`;
+      }
+    });
+  }
+});
+
+
+
+
+
+
+
+
 const allSongs = [
   {
     id: 0,
@@ -287,3 +331,6 @@ pauseSong();
 setPlayerDisplay();
 highlightCurrentSong();
 setPlayButtonAccessibleText()
+
+
+
